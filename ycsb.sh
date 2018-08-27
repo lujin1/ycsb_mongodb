@@ -1,8 +1,8 @@
 # bin/sh
-echo "执行recordcount为:$1"
-echo "threads:$2"
+echo "执行recordcount为:$2"
+echo "threads:$3"
 work="workloads/workloada"
-mongodb_url="mongodb.url=mongodb://bIPrqid5BuqQjJ3YYDcKc7TT:N9zAGtJciEFYCVlWNU9MGHOM@10.2.10.100:27017/ycsb?authSource=admin"
+mongodb_url="mongodb.url="$1
 recordcount=$1
 #for i in 1 10 20 50
 #do 
