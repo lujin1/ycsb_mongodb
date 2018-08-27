@@ -7,8 +7,13 @@ recordcount=$2
 #for i in 1 10 20 50
 #do 
 threads=$3
+insertproportion=$5
 result="y_"$recordcount"_"$threads
-#    ./bin/ycsb load mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads > result/$result
+if [ $insertproportion -ne 1 ]
+then
+    ./bin/ycsb load mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads
+fi
+
 ./bin/ycsb run mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads > result/$result
 #done
 echo "--------------------------------"
