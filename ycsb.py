@@ -11,8 +11,8 @@ def drop_collection(mongodb_url):
 	result = collection.drop()
 	print (result)
 	
-def run(mongodb_url, recordcount, threads):
-	result = os.popen('sh ycsb.sh %s %s' %(mongodb_url, recordcount, threads))
+def run(mongodb_url, recordcount, threads, work):
+	result = os.popen('sh ycsb.sh %s %s' %(mongodb_url, recordcount, threads, work))
 	print (result)
 
 def get_model(work):
@@ -28,8 +28,9 @@ if __name__=="__main__":
 	work = conf.get("ycsb","work")
 	recordcount_list = conf.get("ycsb","recordcount_list")
 	threads_list = conf.get("ycsb","threads_list")
+	insertproportion = get_model(work)
 	for recordcount in recordcount_list:
 		for threads in threads_list:
 			drop_collection(mongodb_url)
-			run(mongodb_url, recordcount, threads)
+			run(mongodb_url, recordcount, threads, work)
 	print (os.popen('cat lujin.txt'))
