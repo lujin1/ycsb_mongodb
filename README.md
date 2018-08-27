@@ -25,8 +25,9 @@ cd ycsb-0.15.0
 #### 使用说明
 
 1. 更改 workloads/workloada 自定义模式
->![输入图片说明](https://images.gitee.com/uploads/images/2018/0827/141911_e3c48b03_1753909.png "屏幕截图.png")
+>![workloads/workloada](https://images.gitee.com/uploads/images/2018/0827/141911_e3c48b03_1753909.png "屏幕截图.png")
 2. 执行ycsb.py脚本
+![执行结果](https://images.gitee.com/uploads/images/2018/0827/145933_4e729cc1_1753909.png "屏幕截图.png")
 
 #### 参与贡献
 
