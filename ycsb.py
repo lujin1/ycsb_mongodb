@@ -35,5 +35,5 @@ if __name__=="__main__":
 		for threads in threads_list:
 			drop_collection(mongodb_url)
 			run(mongodb_url, recordcount, threads, work, insertproportion)
+			time.sleep(300)
 	print (commands.getoutput('cat lujin.txt'))
-	time.sleep(60)
