@@ -18,9 +18,10 @@ def run(mongodb_url, recordcount, threads, work, insertproportion):
 
 def get_model(work):
 	with open(work,'r') as f:
-		if "insertproportion" in line:
-			insertproportion = int(line.split('=')[1])
-			return insertproportion
+		for line in f.readlines():
+			if "insertproportion" in line:
+				insertproportion = int(line.split('=')[1])
+				return insertproportion
 
 if __name__=="__main__":
 	conf = ConfigParser.ConfigParser() 
