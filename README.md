@@ -41,7 +41,7 @@ threads_list=
 4. 数据统计
 >将lujin.txt结果填写如下表格：
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0827/150828_48bbc12e_1753909.png "屏幕截图.png")
-服务器资源监控图：
+服务器资源监控图：  
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0827/150855_c6be5eb5_1753909.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0827/150902_a6f6ef53_1753909.png "屏幕截图.png")
 #### 参与贡献
