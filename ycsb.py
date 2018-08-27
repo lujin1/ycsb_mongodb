@@ -1,4 +1,5 @@
 # /bin/python
+# encoding=utf-8
 import time
 import commands
 from pymongo import MongoClient
@@ -34,6 +35,9 @@ if __name__=="__main__":
 	for recordcount in recordcount_list:
 		for threads in threads_list:
 			drop_collection(mongodb_url)
+			start_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 			run(mongodb_url, recordcount, threads, work, insertproportion)
+			end_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+			print ("时间间隔：%s--%s"%(start_time, end_time))
 			time.sleep(300)
 	print (commands.getoutput('cat lujin.txt'))
