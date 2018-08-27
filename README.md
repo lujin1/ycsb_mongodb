@@ -11,9 +11,16 @@
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 安装jdk 版本>1.8
+```
+javac -version
+```
+2. 安装ycsb
+```
+curl -O --location https://github.com/brianfrankcooper/YCSB/releases/download/0.15.0/ycsb-0.15.0.tar.gz
+tar xfvz ycsb-0.15.0.tar.gz
+cd ycsb-0.15.0
+```
 
 #### 使用说明
 
