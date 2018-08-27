@@ -1,5 +1,6 @@
 # /bin/python
-import os
+import time
+import commands
 from pymongo import MongoClient
 import ConfigParser
 
@@ -11,8 +12,8 @@ def drop_collection(mongodb_url):
 	result = collection.drop()
 	print (result)
 	
-def run(mongodb_url, recordcount, threads, work):
-	result = os.popen('sh ycsb.sh %s %s' %(mongodb_url, recordcount, threads, work))
+def run(mongodb_url, recordcount, threads, work, insertproportion):
+	result = commands.getoutput('sh ycsb.sh %s %s' %(mongodb_url, recordcount, threads, work, insertproportion))
 	print (result)
 
 def get_model(work):
@@ -32,5 +33,6 @@ if __name__=="__main__":
 	for recordcount in recordcount_list:
 		for threads in threads_list:
 			drop_collection(mongodb_url)
-			run(mongodb_url, recordcount, threads, work)
-	print (os.popen('cat lujin.txt'))
+			run(mongodb_url, recordcount, threads, work, insertproportion)
+	print (commands.getoutput('cat lujin.txt'))
+	time.sleep(60)
