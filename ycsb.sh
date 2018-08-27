@@ -3,10 +3,10 @@ echo "执行recordcount为:$2"
 echo "threads:$3"
 work="workloads/workloada"
 mongodb_url="mongodb.url="$1
-recordcount=$1
+recordcount=$2
 #for i in 1 10 20 50
 #do 
-threads=$2
+threads=$3
 result="y_"$recordcount"_"$threads
 #    ./bin/ycsb load mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads > result/$result
 ./bin/ycsb run mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads > result/$result
