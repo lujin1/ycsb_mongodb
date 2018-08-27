@@ -37,6 +37,7 @@ recordcount_list=
 threads_list= 
 ```
 3. 执行ycsb.py脚本
+`python ycsb.py`
 >![执行结果](https://images.gitee.com/uploads/images/2018/0827/145933_4e729cc1_1753909.png "屏幕截图.png")
 
 #### 参与贡献
