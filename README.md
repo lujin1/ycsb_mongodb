@@ -38,6 +38,9 @@ threads_list=
 `python ycsb.py`
 >![执行结果](https://images.gitee.com/uploads/images/2018/0827/145933_4e729cc1_1753909.png "屏幕截图.png")
 
+4. 数据统计
+>将lujin.txt结果填写如下表格：
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0827/150828_48bbc12e_1753909.png "屏幕截图.png")
 #### 参与贡献
 
 1. Fork 本项目
