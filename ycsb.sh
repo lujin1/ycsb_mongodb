@@ -1,5 +1,6 @@
 # bin/sh
 echo "执行recordcount为:$1"
+echo "threads:$2"
 work="workloads/workloada"
 mongodb_url="mongodb.url=mongodb://bIPrqid5BuqQjJ3YYDcKc7TT:N9zAGtJciEFYCVlWNU9MGHOM@10.2.10.100:27017/ycsb?authSource=admin"
 recordcount=$1
