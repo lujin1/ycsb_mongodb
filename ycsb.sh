@@ -38,4 +38,5 @@ do
     end_time=`cat $result|awk -F ',' '/end_time/{print $2}'`
     echo "$start_time|$end_time|$result|$Thread|$recordcount|$Throughput|$READ_95thPercentileLatency|$READ_99thPercentileLatency|$UPDATE_95thPercentileLatency|$UPDATE_99thPercentileLatency|$INSERT_95thPercentileLatency|$INSERT_99thPercentileLatency">>lujin.txt
 done
+echo "数据处理完成"
 #echo "请打开lujin.txt查看结果"
