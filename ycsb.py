@@ -39,5 +39,11 @@ if __name__=="__main__":
 			run(mongodb_url, recordcount, threads, work, insertproportion)
 			end_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 			print ("时间间隔：%s--%s"%(start_time, end_time))
+			try:
+				file = "result/y_" + recordcount + "_" + threads
+				ff = open(file,'a')
+				ff.write("start_time:%s\n" %start_time)
+				ff.write("start_time:%s\n" %start_time)
+				ff.close()
 			time.sleep(600)
 	print (commands.getoutput('cat lujin.txt'))
