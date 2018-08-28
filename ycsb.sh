@@ -15,7 +15,7 @@ then
    $ycsb_dir/bin/ycsb load mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads
 fi
 
-$ycsb_dir/bin/ycsb run mongodb -P $work -p $mongodb_url -p recordcount=$recordcount -threads $threads > result/$result
+$ycsb_dir/bin/ycsb run mongodb -P $work -p $mongodb_url -threads $threads > result/$result
 #done
 end_time=`date +'%Y-%m-%d %H:%M:%S'`
 echo "start_time,"$start_time >> result/$result
