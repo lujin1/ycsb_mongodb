@@ -1,5 +1,4 @@
 # /bin/sh
-
 mongodb_url="mongodb.url="$1
 recordcount=$2
 threads=$3
