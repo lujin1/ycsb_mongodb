@@ -80,7 +80,7 @@ if __name__=="__main__":
         utc_time_start_time = strf_strf_utc(end_time,'start')[0]
         start = strf_utc_8(utc_time_start_time)[1]
         print(strf_utc_8(utc_time_start_time)[1])
-        prometheus_url = "http://wise-prometheus.chinanorth.cloudapp.chinacloudapi.cn"
+        prometheus_url = ""
         keys = ["cpu_user","cpu_sys","cpu_wait","mem_percent"]
         for key in keys:
             max_data, min_data, avg_data = prometheus_query_range(prometheus_url,key,start,end)
