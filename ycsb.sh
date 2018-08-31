@@ -6,8 +6,8 @@ work=$4
 insertproportion=$5
 ycsb_dir=$6
 result="y_"$recordcount"_"$threads
-start_time=`date +'%Y-%m-%d %H:%M:%S'`
-
+#start_time=`date +'%Y-%m-%d %H:%M:%S'`
+start_time=`date -u -d"+8 hour" +'%Y-%m-%d %H:%M:%S'`
 echo "执行recordcount为:$2"
 echo "threads:$3"
 if [ $insertproportion -ne 1 ]
@@ -17,7 +17,8 @@ fi
 
 $ycsb_dir/bin/ycsb run mongodb -P $work -p $mongodb_url -threads $threads > result/$result
 #done
-end_time=`date +'%Y-%m-%d %H:%M:%S'`
+#end_time=`date +'%Y-%m-%d %H:%M:%S'`
+end_time=`date -u -d"+8 hour" +'%Y-%m-%d %H:%M:%S'`
 echo "start_time,"$start_time >> result/$result
 echo "end_time,"$end_time >> result/$result
 echo "--------------------------------"
