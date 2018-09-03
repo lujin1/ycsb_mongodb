@@ -59,9 +59,9 @@ if __name__=="__main__":
     end = strf_strf_utc(start_time,'start')[1]
     prometheus_url = sys.argv[3]
     keys = ["cpu_user","cpu_sys","cpu_wait","mem_percent"]
-        for key in keys:
-            max_data, min_data, avg_data = prometheus_query_range(prometheus_url,key,start,end)
-            print(max_data, min_data, avg_data)
+    for key in keys:
+        max_data, min_data, avg_data = prometheus_query_range(prometheus_url,key,start,end)
+        print(max_data, min_data, avg_data)
 
 # data = xlrd.open_workbook('C:\\Users\\lu.jin\\Desktop\\test.xls')
 # table = data.sheet_by_name(u'Sheet1')
