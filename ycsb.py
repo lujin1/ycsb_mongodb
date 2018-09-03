@@ -13,7 +13,7 @@ def drop_collection(mongodb_url):
         print (result)
 
 def run(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url):
-        result = commands.getoutput('sh ycsb.sh %s %s %s %s %d %s' %(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url))
+        result = commands.getoutput('sh ycsb.sh %s %s %s %s %d %s %s' %(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url))
         print (result)
 
 def get_model(work):
