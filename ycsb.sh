@@ -5,6 +5,7 @@ threads=$3
 work=$4
 insertproportion=$5
 ycsb_dir=$6
+prometheus_url=$7
 result="y_"$recordcount"_"$threads
 #start_time=`date +'%Y-%m-%d %H:%M:%S'`
 start_time=`date -u -d"+8 hour" +'%Y-%m-%d %H:%M:%S'`
@@ -23,7 +24,7 @@ echo "start_time,"$start_time >> result/$result
 echo "end_time,"$end_time >> result/$result
 echo "--------------------------------"
 echo "处理数据中"
-echo "start_time|end_start|result|Thread|recordcount|Throughput|READ_95|READ_99|UPDATE_95|UPDATE_99|INSERT_95|INSERT_99">lujin.txt
+echo "start_time|end_start|result|Thread|recordcount|Throughput|READ_95|READ_99|UPDATE_95|UPDATE_99|INSERT_95|INSERT_99|monitor">lujin.txt
 for result in $(ls result/y_*)
 do
     Thread=`echo $result|awk -F '_' '{print $3}'`
@@ -37,7 +38,8 @@ do
     INSERT_99thPercentileLatency=`cat $result|awk '/99thPercentileLatency/&&/INSERT/{print $3}'`
     start_time=`cat $result|awk -F ',' '/start_time/{print $2}'`
     end_time=`cat $result|awk -F ',' '/end_time/{print $2}'`
-    echo "$start_time|$end_time|$result|$Thread|$recordcount|$Throughput|$READ_95thPercentileLatency|$READ_99thPercentileLatency|$UPDATE_95thPercentileLatency|$UPDATE_99thPercentileLatency|$INSERT_95thPercentileLatency|$INSERT_99thPercentileLatency">>lujin.txt
+    monitor = `python monitor.py $start_time $end_time $prometheus_url`
+    echo "$start_time|$end_time|$result|$Thread|$recordcount|$Throughput|$READ_95thPercentileLatency|$READ_99thPercentileLatency|$UPDATE_95thPercentileLatency|$UPDATE_99thPercentileLatency|$INSERT_95thPercentileLatency|$INSERT_99thPercentileLatency|$monitor">>lujin.txt
 done
 echo "数据处理完成"
 #echo "请打开lujin.txt查看结果"
