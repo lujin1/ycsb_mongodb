@@ -5,14 +5,15 @@ import json
 import time
 from datetime import datetime,timezone,timedelta
 import xlrd
+import sys
 
 def strf_strf_utc(local_time,time_type):
     timeArray = time.strptime(local_time, "%Y-%m-%d %H:%M:%S")
     # 转换为时间戳:
     timeStamp = int(time.mktime(timeArray))
     # print(timeStamp - 3600)
-    if time_type == 'start':
-        timeStamp = timeStamp - 3600
+    # if time_type == 'start':
+    #    timeStamp = timeStamp - 3600
     utc_time = datetime.utcfromtimestamp(timeStamp)
     utc_time_TZ = utc_time.strftime("%Y-%m-%dT%H:%M:%SZ")
     return utc_time,utc_time_TZ
@@ -52,40 +53,16 @@ def prometheus_query_range(prometheus_url,key,start,end):
                 return 0,0,0
 
 if __name__=="__main__":
-    date = '''2018/8/29 8:09:16,
-2018/8/29 9:14:22,
-2018/8/29 10:19:27,
-2018/8/29 11:24:43,
-2018/8/29 12:29:57,
-2018/8/29 13:35:08,
-2018/8/28 7:12:15,
-2018/8/28 8:23:24,
-2018/8/28 9:34:19,
-2018/8/29 14:51:38,
-2018/8/29 16:08:20,
-2018/8/29 17:24:55,
-2018/8/28 15:47:50,
-2018/8/28 17:58:02,
-2018/8/28 20:08:06,
-2018/8/29 19:29:56,
-2018/8/29 21:34:59,
-2018/8/29 23:40:03
-'''
-    date_list = date.replace('\n','').split(',')
-    for item in date_list:
-        end_time = item.replace('/','-')
-        utc_time_end_time = strf_strf_utc(end_time,'end')[0]
-        end = strf_utc_8(utc_time_end_time)[1]
-        print(strf_utc_8(utc_time_end_time)[1])
-        utc_time_start_time = strf_strf_utc(end_time,'start')[0]
-        start = strf_utc_8(utc_time_start_time)[1]
-        print(strf_utc_8(utc_time_start_time)[1])
-        prometheus_url = ""
-        keys = ["cpu_user","cpu_sys","cpu_wait","mem_percent"]
+    start_time = sys.argv[1]
+    end_time = sys.argv[2]
+    start = strf_strf_utc(end_time,'start')[1]
+    end = strf_strf_utc(start_time,'start')[1]
+    prometheus_url = sys.argv[3]
+    keys = ["cpu_user","cpu_sys","cpu_wait","mem_percent"]
         for key in keys:
             max_data, min_data, avg_data = prometheus_query_range(prometheus_url,key,start,end)
-            print(key)
-            print(max_data, min_data, avg_data )
+            print(max_data, min_data, avg_data)
+
 # data = xlrd.open_workbook('C:\\Users\\lu.jin\\Desktop\\test.xls')
 # table = data.sheet_by_name(u'Sheet1')
 # print(table.col_values(1))
