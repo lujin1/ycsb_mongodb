@@ -38,7 +38,7 @@ do
     INSERT_99thPercentileLatency=`cat $result|awk '/99thPercentileLatency/&&/INSERT/{print $3}'`
     start_time=`cat $result|awk -F ',' '/start_time/{print $2}'`
     end_time=`cat $result|awk -F ',' '/end_time/{print $2}'`
-    monitor = `python monitor.py $start_time $end_time $prometheus_url`
+    monitor = `python monitor.py "$start_time" "$end_time" $prometheus_url`
     echo "$start_time|$end_time|$result|$Thread|$recordcount|$Throughput|$READ_95thPercentileLatency|$READ_99thPercentileLatency|$UPDATE_95thPercentileLatency|$UPDATE_99thPercentileLatency|$INSERT_95thPercentileLatency|$INSERT_99thPercentileLatency|$monitor">>lujin.txt
 done
 echo "数据处理完成"
