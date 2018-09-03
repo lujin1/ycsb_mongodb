@@ -12,8 +12,8 @@ def drop_collection(mongodb_url):
         result = collection.drop()
         print (result)
 
-def run(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir):
-        result = commands.getoutput('sh ycsb.sh %s %s %s %s %d %s' %(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir))
+def run(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url):
+        result = commands.getoutput('sh ycsb.sh %s %s %s %s %d %s' %(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url))
         print (result)
 
 def get_model(work):
@@ -32,9 +32,10 @@ if __name__=="__main__":
         threads_list = conf.get("ycsb","threads_list").split(',')
         insertproportion = get_model(work)
         ycsb_dir = conf.get("ycsb","ycsb_dir")
+        prometheus_url = conf.get("prometheus","prometheus_url")
         for recordcount in recordcount_list:
                 for threads in threads_list:
                         drop_collection(mongodb_url)
-                        run(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir)
+                        run(mongodb_url, recordcount, threads, work, insertproportion, ycsb_dir, prometheus_url)
                         time.sleep(600)
         print (commands.getoutput('cat lujin.txt'))
