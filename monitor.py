@@ -4,7 +4,6 @@ import requests
 import json
 import time
 from datetime import datetime,timedelta
-# import xlrd
 import sys
 
 def strf_strf_utc(local_time,time_type):
@@ -18,12 +17,12 @@ def strf_strf_utc(local_time,time_type):
     utc_time_TZ = utc_time.strftime("%Y-%m-%dT%H:%M:%SZ")
     return utc_time,utc_time_TZ
 
-#def strf_utc_8(utc_time):
-    # dt = utc_time.replace(tzinfo=timezone.utc)
-    # tzutc_8 = timezone(timedelta(hours=8))
-    # strf_utc_8 = dt.astimezone(tzutc_8)
-    # strf_utc_8_TZ = strf_utc_8.strftime("%Y-%m-%dT%H:%M:%SZ")
-    # return strf_utc_8,strf_utc_8_TZ
+# def strf_utc_8(utc_time):
+#     dt = utc_time.replace(tzinfo=timezone.utc)
+#     tzutc_8 = timezone(timedelta(hours=8))
+#     strf_utc_8 = dt.astimezone(tzutc_8)
+#     strf_utc_8_TZ = strf_utc_8.strftime("%Y-%m-%dT%H:%M:%SZ")
+#     return strf_utc_8,strf_utc_8_TZ
 
 def prometheus_query_range(prometheus_url,key,start,end):
     expr = 'bosh_job_%s{bosh_deployment="mongodb-single-benchmark",bosh_job_az="z1",bosh_job_id="797c26f9-d273-42d5-8170-0c9cebf8f6d0",bosh_job_index="0",bosh_job_ip="42.159.5.224",bosh_job_name="mongodb",bosh_name="x-bosh",bosh_uuid="09113c6d-46c2-4f7f-9ea8-8b8c7af33976",environment="cf",instance="localhost:9190",job="bosh"}&start=%s&end=%s&step=60s' %(key,start, end)
@@ -51,18 +50,24 @@ def prometheus_query_range(prometheus_url,key,start,end):
                 return max_data,min_data,avg_data
             except:
                 return 0,0,0
+    else:
+        return status_code,response.text,"error"
 
 if __name__=="__main__":
     start_time = sys.argv[1]
     end_time = sys.argv[2]
-    start = strf_strf_utc(end_time,'start')[1]
-    end = strf_strf_utc(start_time,'start')[1]
+    start = strf_strf_utc(start_time,'start')[1]
+    end = strf_strf_utc(end_time,'start')[1]
     prometheus_url = sys.argv[3]
     keys = ["cpu_user","cpu_sys","cpu_wait","mem_percent"]
+    result = []
     for key in keys:
+#        print(prometheus_url,key,start,end)
         max_data, min_data, avg_data = prometheus_query_range(prometheus_url,key,start,end)
-        print(max_data, min_data, avg_data)
-
+#        print(key, max_data, min_data, avg_data)
+	    key_list = [max_data, min_data, avg_data]
+        result.append(key_list)
+    print(result)
 # data = xlrd.open_workbook('C:\\Users\\lu.jin\\Desktop\\test.xls')
 # table = data.sheet_by_name(u'Sheet1')
 # print(table.col_values(1))
@@ -73,5 +78,3 @@ if __name__=="__main__":
 #         end_time = "%s-%s-%s %s:%s:%s"%(time[0],time[1],time[2],time[3],time[4],0)
 #         print (end_time)
 #         print(type(end_time))
-
-
